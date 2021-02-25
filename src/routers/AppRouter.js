@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
+import { AuthContext } from "../auth/AuthContext";
 import { LoginScreen } from "../components/login/LoginScreen";
-import { MarvelScreen } from "../components/marvel/MarvelScreen";
-import { Navbar } from "../components/ui/Navbar";
+
 import { DahsboardRoutes } from "./DahsboardRoutes";
+import { PrivetRoute } from "./PrivetRoute";
+import { PublicRoute } from "./PublicRoute";
 
 
 export const AppRouter = () => {
+
+    const {user} = useContext(AuthContext)
+
     return (
         <Router>
             <div>
@@ -20,8 +25,8 @@ export const AppRouter = () => {
                 {/* A <Switch> looks through its children <Route>s and
                     renders the first one that matches the current URL. */}
                 <Switch>
-                    <Route exact path="/login" component={LoginScreen}></Route>
-                    <Route path="/" component={DahsboardRoutes}></Route>
+                    <PublicRoute path="/login" usAuthenticate={user.logged} component={LoginScreen}></PublicRoute>
+                    <PrivetRoute path="/" usAuthenticate={user.logged} component={DahsboardRoutes}></PrivetRoute>
                 </Switch>
             </div>
         </Router>

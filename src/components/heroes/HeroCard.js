@@ -11,8 +11,8 @@ export const HeroCard = ({hero}) => {
                 
                 <p className="card-text text-center">{hero.characters}</p>
                 
-                <p className="card-text text-justify">
-                    <small className="text-muted">{hero.first_appearance}</small>
+                <p className="card-text text-center">
+                    <small className="text-muted card-text text-center">{hero.first_appearance}</small>
                 </p>
                 <Link className="btn btn-danger" to={`./heroe/${hero.id}`}>Mas..</Link>
             </div>
